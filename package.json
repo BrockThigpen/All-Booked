@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/BrockThigpen/Project-2/issues"
   },
-  "homepage": "https://github.com/BrockThigpen/Project-2#readme"
+  "homepage": "https://github.com/BrockThigpen/Project-2#readme",
+  "dependencies": {
+    "eslint": "^6.8.0"
+  }
 }
