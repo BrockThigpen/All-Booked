@@ -11,10 +11,14 @@
 		<script src="/assets/js/library.js"></script>
 	</head>
 	<body>
-		<p>Username: </p><input id="username">
-<p>Password: </p><input id="password">
-
-<button id="login">Login</button>
-<button id="createAccount">Create Account</button>
+        <h1>Search Our Library</h1>
+        <input id="search" placeholder="Title, Author, ISBN, or Keyword">
+        <h3>Search By...</h3>
+        <input type="radio" name="search" value="keyword" id="userKeyword"> Keyword<br>
+        <input type="radio" name="search" value="title" id="userTitle"> Title<br>
+        <input type="radio" name="search" value="author" id="userAuthor"> Author<br>
+        <input type="radio" name="search" value="isbn" id="userISBN"> ISBN<br>
+        <button id="button" type="button">Search!</button>
+        <div id="results"></div>
 	</body>
 </html>
