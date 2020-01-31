@@ -26,7 +26,7 @@ function bookSearch() {
       results.innerHTML +='<p>Description: ' + data.items[i].volumeInfo.description + '</p>';
       results.innerHTML +='<p>ISBN: ' + data.items[i].volumeInfo.industryIdentifiers[0].identifier + '</p>';
       results.innerHTML +='<p>Page Count: ' + data.items[i].volumeInfo.pageCount + '</p>';
-      results.innerHTML +='<img src="' + data.items[i].volumeInfo.imageLinks.thumbnail + '">'
+      results.innerHTML +='<img src="' + data.items[i].volumeInfo.imageLinks.thumbnail + '">';
     }
   });
 }
