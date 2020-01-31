@@ -1,7 +1,7 @@
 {
   "name": "Project2",
   "version": "1.0.0",
-  "description": "Eslint Example",
+  "description": "Project 2",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -10,6 +10,8 @@
   },
   "license": "ISC",
   "dependencies": {
-    "eslint": "^4.19.1"
+    "eslint": "^4.19.1",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0"
   }
 }
