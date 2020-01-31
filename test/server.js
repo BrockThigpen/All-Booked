@@ -1,28 +1,28 @@
 function bookSearch() {
   var search = '';
-  document.getElementById('results').innerHTML="";
-    console.log(search);
+  document.getElementById('results').innerHTML='';
+  console.log(search);
 
   if(document.getElementById('keyword').checked) {
     search = document.getElementById('search').value;
-    }
-    else if(document.getElementById('title').checked) {
-      search = 'intitle:' + document.getElementById('search').value;
-    }
-    else if(document.getElementById('author').checked) {
-      search = "inauthor:" + document.getElementById('search').value;
-    }
-    else if(document.getElementById('isbn').checked) {
-      search = "isbn:" + document.getElementById('search').value;
-    }
-    else {
-      alert("nope");
-    }
+  }
+  else if(document.getElementById('title').checked) {
+    search = 'intitle:' + document.getElementById('search').value;
+  }
+  else if(document.getElementById('author').checked) {
+    search = 'inauthor:' + document.getElementById('search').value;
+  }
+  else if(document.getElementById('isbn').checked) {
+    search = 'isbn:' + document.getElementById('search').value;
+  }
+  else {
+    alert('nope');
+  }
 
     $.ajax({
       url: 'https://www.googleapis.com/books/v1/volumes?q=' + search + '&key=AIzaSyDHWfAVWQPX7UK1qgA-EZvxpQROi2uXe_w',
-      dataType: "json",
-      type: "GET"
+      dataType: 'json',
+      type: 'GET'
     }).then(function(data) {
       for (i=0;i<data.items.length; i++) {
         results.innerHTML += '<h2>' + data.items[i].volumeInfo.title + '</h2>';
