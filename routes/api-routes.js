@@ -1,9 +1,9 @@
-let db = require('../models');
+// let db = require('../models');
 
-module.exports = app => {
+// module.exports = app => {
 
-app.get('/', (req, res) => {
-  db.
-})
+// app.get('/', (req, res) => {
+//   db.
+// })
 
-};
+// };
