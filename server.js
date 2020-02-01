@@ -4,6 +4,8 @@ let PORT = process.env.PORT || 8080;
 
 let app = express();
 
+let db = require('./models');
+
 // Serve static content for the app from the 'public' directory in the application directory.
 app.use(express.static('public'));
 
@@ -19,7 +21,8 @@ app.set('view engine', 'handlebars');
 
 // Routes
 // =============================================================
-require('./routes/api-routes.js')(app);
+//require('./routes/api-routes.js')(app);
+//require('./routes/html-routes.js')(app);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
