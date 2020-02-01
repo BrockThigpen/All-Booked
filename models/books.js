@@ -43,6 +43,13 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
+    year : {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [1]
+      }
+    },
     totalCopies : {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -57,6 +64,18 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
+    checkOut : {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
+    },
+    checkIn : {
+      type: Sequelize.DATE,
+      defaultValue: Sequelize.NOW
+    },
+    dueDate : {
+      type: Sequelize.DATE
+    },
+    freezeTableName: true,
   });
 
   return Books;
