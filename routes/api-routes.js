@@ -21,30 +21,7 @@ module.exports = function(app) {
       });
   });
 
-//   // Get route for returning posts of a specific category
-//   app.get("/api/posts/category/:category", function(req, res) {
-//     db.Post.findAll({
-//       where: {
-//         category: req.params.category
-//       }
-//     })
-//       .then(function(dbPost) {
-//         res.json(dbPost);
-//       });
-//   });
-
-//   // Get route for retrieving a single post
-//   app.get("/api/posts/:id", function(req, res) {
-//     db.Post.findOne({
-//       where: {
-//         id: req.params.id
-//       }
-//     })
-//       .then(function(dbPost) {
-//         res.json(dbPost);
-//       });
-//   });
-
+ 
   // POST route for saving a new post
   app.post("/api/book", function(req, res) {
     console.log(req.body);
