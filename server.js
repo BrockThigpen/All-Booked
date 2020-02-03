@@ -14,17 +14,21 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Set Handlebars.
-let exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
 app.set('view engine', 'handlebars');
 
-const Router = express.Router();
+const api = express.Router();
+const html = express.Router();
 
 // Routes
 // =============================================================
-require('./routes/api-routes.js')(Router);
-require('./routes/html-routes.js')(Router);
+require('./routes/api-routes.js')(api);
+require('./routes/html-routes.js')(html);
+
+app.use(api);
+app.use(html);
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
