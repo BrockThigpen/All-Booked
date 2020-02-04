@@ -5,25 +5,24 @@
 // Dependencies
 // =============================================================
 
-// Requiring our Todo model
-var db = require("../models");
+// Requiring our books model
+var db = require('../models');
 
 // Routes
 // =============================================================
 module.exports = function(app) {
 
-  // GET route for getting all of the posts
-  app.get("/api/book/", function(req, res) {
+  // GET route for getting all of the data from the database
+  app.get('/api/book/', function(req, res) {
     db.books.findAll({})
       .then(function(dbBooks) {
         res.json(dbBooks);
-        console.log('getBooks', dbBooks)
+        console.log('getBooks', dbBooks);
       });
   });
 
- 
   // POST route for saving a new post
-  app.post("/api/book", function(req, res) {
+  app.post('/api/book', function(req, res) {
     console.log(req.body);
     db.books.create({
       title: req.body.title,
@@ -38,5 +37,5 @@ module.exports = function(app) {
         res.json(dbBooked);
       });
   });
- 
+
 };

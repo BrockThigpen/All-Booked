@@ -7,7 +7,7 @@ let selectedBook = {
   description: '',
   pages: 0,
   isbn: 0
-}
+};
 // Front end variables
 
 function bookSearch() {
@@ -99,7 +99,7 @@ function bookSearch() {
       contentDiv.append(cardISBN);
       buttonDiv.append(cardButton);
 
-      console.log(cardDiv.dataset.id)
+      console.log(cardDiv.dataset.id);
     }
   });
 }
@@ -107,7 +107,7 @@ function bookSearch() {
 
 window.onload = function () {
   document.getElementById('apiButton').addEventListener('click', bookSearch);
-}
+};
 
 $(document).on('click', '.cardBtn', function () {
   event.preventDefault();
@@ -123,7 +123,7 @@ $(document).on('click', '.cardBtn', function () {
   selectedBook.pages = divNum.getElementsByClassName('pages')[0].innerText;
   selectedBook.isbn = divNum.getElementsByClassName('isbn')[0].innerText;
   selectedBook.img = divNum.getElementsByClassName('img')[0].src;
- 
+
   //create a new object to hold the books when add a book is clicked
   var orderedBooks = {
     title: selectedBook.title,
@@ -134,25 +134,24 @@ $(document).on('click', '.cardBtn', function () {
     pageNumbers: selectedBook.pages,
     ISBN: selectedBook.isbn
   };
-    
-// Send the POST request.
-$.ajax("/api/book/", {
-  type: "POST",
-  data: orderedBooks
-}).then(
-  function (data) {
-    // Reload the page to get the updated list
-    console.log("data", data)
-  }
-);
 
-})
+  //Send the POST request.
+  $.ajax('/api/book/', {
+    type: 'POST',
+    data: orderedBooks
+  }).then(
+    function (data) {
+    // Reload the page to get the updated list
+      console.log('data', data);
+    }
+  );
+
+});
 // Send the POST request.
-$.ajax("/api/book/", {
-  type: "GET",
+$.ajax('/api/book/', {
+  type: 'GET',
 }).then(
-  function () {
-     
+  function (result) {
+    console.log('result', result);
   }
 );
- 
