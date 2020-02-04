@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-  var Books = sequelize.define('Books', {
+  var Books = sequelize.define('books', {
     title: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -7,6 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
+
     authorName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -14,7 +15,7 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
-    desciption : {
+    description : {
       type: DataTypes.TEXT,
       allowNull: false,
       validate: {
@@ -22,7 +23,7 @@ module.exports = function (sequelize, DataTypes) {
       }
     },
     ISBN : {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: true,
       validate: {
         len: [1]
@@ -42,23 +43,35 @@ module.exports = function (sequelize, DataTypes) {
         len: [1]
       }
     },
+    year : {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [1]
+      }
+    },
     totalCopies : {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
     },
     copiesIN : {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
     },
-  });
 
+  });
+    // force: true will drop the table if it already exists
+  Books.sync({force: false}).then(function() {
+    // Table created with new data
+    return Books;
+  });
   return Books;
 };
-// Syncs with DB
-Books.sync();
+
+

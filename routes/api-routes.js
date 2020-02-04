@@ -2,8 +2,8 @@ const db = require('../models');
 
 module.exports = app => {
   // route for finding books by title
-  app.get('/api/Books/title/:title', (req, res) => {
-    db.Books.findAll({
+  app.get('/api/book/title/:title', (req, res) => {
+    db.books.findAll({
       where: {
         title: req.params.title
       }
@@ -11,8 +11,8 @@ module.exports = app => {
   });
 
   // route for finding book by author
-  app.get('/api/Books/author/:author', (req, res) => {
-    db.Books.findAll({
+  app.get('/api/book/author/:author', (req, res) => {
+    db.books.findAll({
       where: {
         author: req.params.author
       }
@@ -20,8 +20,8 @@ module.exports = app => {
   });
 
   // route for finding book by ISBN
-  app.get('/api/Books/isbn/:isbn', (req, res) => {
-    db.Books.findOne({
+  app.get('/api/book/isbn/:isbn', (req, res) => {
+    db.books.findOne({
       where: {
         isbn: req.params.isbn
       }
@@ -29,20 +29,21 @@ module.exports = app => {
   });
 
   // route for adding a book
-  app.post('/api/Books', (req, res) => {
-    db.Books.create({
+  app.post('/api/book', (req, res) => {
+    db.books.create({
       title: req.body.title,
-      authorName: req.body.author,
+      authorName: req.body.authorName,
+      images: req.body.images,
+      year: req.body.year,
       description: req.body.description,
-      isbn: req.body.isbn,
-      images: req.body.img,
-      pageNumbers: req.body.pages
+      pageNumbers: req.body.pageNumbers,
+      ISBN: req.body.ISBN
     }).then(results => res.json(results));
   });
 
   // route for updating num of copies
-  app.put('api/Books/:id', (res, req) => {
-    db.Books.update({
+  app.put('api/book/:id', (res, req) => {
+    db.books.update({
       where: {
         id: req.params.id
       }

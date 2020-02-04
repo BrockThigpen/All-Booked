@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+		<!-- <link rel="stylesheet" href="/assets/css/style.css" type="text/css" /> -->
+		<title>All Booked Library</title>
+		    <script
+    src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+    crossorigin="anonymous"></script>
+		<script src="./js/apiSearch.js"></script>
+	</head>
+	<body>
+                <h1>Add Books To Library</h1>
+                <input id="searchAPI" placeholder="Title, Author, ISBN, or Keyword">
+                <h3>Search By...</h3>
+                <input type="radio" name="search" value="keyword" id="apiKeyword"> Keyword<br>
+                <input type="radio" name="search" value="title" id="apiTitle"> Title<br>
+                <input type="radio" name="search" value="author" id="apiAuthor"> Author<br>
+                <input type="radio" name="search" value="isbn" id="apiISBN"> ISBN<br>
+                <button id="apiButton" type="submit">Search!</button>
+                <div id="apiResults">
+                </div>
+	</body>
+</html>
