@@ -13,6 +13,11 @@
     "eslint": "^4.19.1",
     "express": "^4.17.1",
     "express-handlebars": "^3.1.0",
+<<<<<<< HEAD
     "sites": "^1.0.2"
+=======
+    "mysql2": "^2.1.0",
+    "sequelize": "^5.21.3"
+>>>>>>> bce621fd6e9231f083b334851628e2c4cf33b415
   }
 }
