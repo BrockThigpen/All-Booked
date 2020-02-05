@@ -66,12 +66,10 @@ module.exports = function (sequelize, DataTypes) {
     },
 
   });
-    // force: true will drop the table if it already exists
-  Books.sync({force: false}).then(function() {
-    // Table created with new data
-    return Books;
-  });
+  //   // force: true will drop the table if it already exists
+  // Books.sync({force: false}).then(function() {
+  //   // Table created with new data
+  //   return Books;
+  // });
   return Books;
 };
-
-
