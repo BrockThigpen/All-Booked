@@ -1,9 +1,50 @@
-    <h1>Search Our Library</h1>
-    <input id="searchDB" placeholder="Title, Author, ISBN, or Keyword">
-    <h3>Search By...</h3>
-    <input type="radio" name="search" value="keyword" id="dbKeyword"> Keyword<br>
-    <input type="radio" name="search" value="title" id="dbTitle"> Title<br>
-    <input type="radio" name="search" value="author" id="dbAuthor"> Author<br>
-    <input type="radio" name="search" value="isbn" id="dbISBN"> ISBN<br>
-    <button id="button" type="button">Search!</button>
-    <div id="dbResults"></div>
+<label for="site-search">Search Books: </label>
+<input type="search" placeholder="Looking for something?" id="site-search" name="q"
+    aria-label="Search through site content">
+<form action="#">
+    <p>
+        <label>
+            <input name="group1" class="rB" type="radio" id="apiTitle" checked />
+            <span>Title</span>
+        </label>
+        <label>
+            <input name="group1" class="rB" type="radio" id="apiAuthor" checked />
+            <span>Author</span>
+        </label>
+        <label>
+            <input name="group1" class="rB" type="radio" id="apiISBN" checked />
+            <span>ISBN</span>
+        </label>
+    </p>
+    <a class="waves-effect waves-light btn" id="apiButton">Go</a>
+    <div class="row">
+        <div class="column sm12"><img src="../public/assets/images/allBookedLogo.png" class="center" height="" width="">
+            <center>
+                <p id="addToLibrary">Can't find the book you're looking for? No Worries! Click here to add a book to our
+                    library
+                    stock!</p>
+            </center>
+            <center>
+                <p><a class="btn-floating waves-effect waves-light" id="goToButton"><i class="material-icons">+</i></a>
+                </p>
+            </center>
+            <div class="container">
+                <div class="row">
+                    <div class="col s3">
+                        <p id="cardImg">*Thumbnail here*</p>
+                    </div>
+                    </p>
+                    <div class="col s6">
+                        <p id="cardTitle">*Title*</p>
+                        <p id="cardAuthor">*Author*</p>
+                        <p id="cardYear">*Year*</p>
+                        <p id="cardDescription">*Description*</p>
+                        <p id="cardPages">*Page Number*</p>
+                        <p id="cardISBN">*ISBN*</p>
+                    </div>
+                    <div class="col s3">
+                        <a class="waves-effect waves-light btn" id="cardButton">Check Out Book</a>
+                    </div>
+                </div>
+            </div>
+        </div>
