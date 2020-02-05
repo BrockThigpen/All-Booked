@@ -1,49 +1,42 @@
 <div class="row">
     <div class="column sm12"><img src="../allBookedLogo.png" class="center" height="" width="">
-        <div class="row">
-            <div class="col s12">
-                <p></p>
-            </div>
-            <div class="col s12 m4 l2">
-                <p></p>
-            </div>
-            <div class="col s12 m4 l8">
-                <p>
-                    <form id="search" class="form-inline">
-                        <div class="form-group mx-sm-3">
-                            <label for="search-input" class="sr-only">Search:</label>
-                            <input type="text" class="form-control" id="search-input"
-                                placeholder="Search your favorite books!">
-                            <form action="#">
 
-                                <p>
-                                    <label>
-                                        <input name="group1" class="rB" type="radio" checked />
-                                        <span>Keyword</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input name="group1" class="rB" type="radio" />
-                                        <span>Title</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input name="group1" class="rB" type="radio" />
-                                        <span>Author</span>
-                                    </label>
-                                </p>
-                                <p>
-                                    <label>
-                                        <input name="group1" class="rB" type="radio" />
-                                        <span>ISBN</span>
-                                    </label>
 
-                        </div>
-                </p>
-                <button type="submit" id="add-search" class="btn btn-primary ml-2">Go</button>
-            </div>
-            </form>
-            </p>
-        </div
+
+      <div class="row">
+        <div class="col s12">
+          <p></p>
+        </div>
+        <div class="col s12 m4 l2">
+          <p></p>
+        </div>
+        <div class="col s12 m4 l8">
+          <p>
+            <form id="search" class="form-inline">
+              <div class="form-group mx-sm-3">
+                <label for="search-input" class="sr-only">Search:</label>
+                <input type="text" class="form-control" id="search-input" placeholder="Search your favorite books!">
+                <form action="#">
+
+                  <p>
+                    <label>
+                      <input name="group1" class="rB" type="radio" id="apiTitle" />
+                      <span>Title</span>
+                    </label>
+                    <label>
+                      <input name="group1" class="rB" type="radio" id="apiAuthor" />
+                      <span>Author</span>
+                    </label>
+                    <label>
+                      <input name="group1" class="rB" type="radio" id="apiISBN" />
+                      <span>ISBN</span>
+                    </label>
+                  </p>
+
+              </div>
+
+              <button type="submit" id="apiButton" class="btn btn-primary ml-2">Go</button>
+        </div>
+        </form>
+        </p>
+      </div>
