@@ -11,7 +11,6 @@ let selectedBook = {
 // Front end variables
 
 function bookSearch() {
-  var apiKeyword = document.getElementById('apiKeyword');
   var apiTitle = document.getElementById('apiTitle');
   var apiAuthor = document.getElementById('apiAuthor');
   var apiISBN = document.getElementById('apiISBN');
@@ -21,9 +20,7 @@ function bookSearch() {
   var search = '';
   apiResults.innerHTML = '';
 
-  if (apiKeyword.checked) {
-    search = searchAPI.value;
-  } else if (apiTitle.checked) {
+  if (apiTitle.checked) {
     search = 'intitle:' + searchAPI.value;
   } else if (apiAuthor.checked) {
     search = 'inauthor:' + searchAPI.value;
@@ -136,7 +133,7 @@ $(document).on('click', '.cardBtn', function () {
   };
 
   //Send the POST request.
-  $.ajax('/api/book/', {
+  $.ajax('/api/book', {
     type: 'POST',
     data: orderedBooks
   }).then(
@@ -147,8 +144,8 @@ $(document).on('click', '.cardBtn', function () {
   );
 
 });
-// Send the POST request.
-$.ajax('/api/book/', {
+//Send the GET request.
+$.ajax('/api/book', {
   type: 'GET',
 }).then(
   function (result) {
