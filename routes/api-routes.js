@@ -1,6 +1,11 @@
 const db = require('../models');
 
 module.exports = app => {
+  // route for viewing all books
+  app.get('/api/book', (req, res) => {
+    db.books.findAll({}).then( results => res.json(results));
+  });
+
   // route for finding books by title
   app.get('/api/book/title/:title', (req, res) => {
     db.books.findAll({
@@ -42,8 +47,11 @@ module.exports = app => {
   });
 
   // route for updating num of copies
-  app.put('api/book/:id', (res, req) => {
+  app.put('api/book', (res, req) => {
     db.books.update({
+      totalCopies: req.body.totalCopies,
+      copiesIN: req.body.copiesIN
+    }, {
       where: {
         id: req.params.id
       }

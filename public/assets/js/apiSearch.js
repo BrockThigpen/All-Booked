@@ -144,7 +144,7 @@ $(document).on('click', '.cardBtn', function () {
   );
 
 });
-// Send the POST request.
+//Send the GET request.
 $.ajax('/api/book', {
   type: 'GET',
 }).then(
