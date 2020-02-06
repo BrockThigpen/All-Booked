@@ -10,7 +10,7 @@
 //     event.preventDefault();
 //     var dbCardID = $(this).data('id');
 
-//     setTimeout(function() { 
+//     setTimeout(function(){
 //     // call the correct button by selecting rows with an index of dbCardID
 //     // then getElementsByClassName('button')[0].innerText = "Book Added To Database"
 

@@ -14,7 +14,7 @@ function bookSearch() {
   var apiTitle = document.getElementById('apiTitle');
   var apiAuthor = document.getElementById('apiAuthor');
   var apiISBN = document.getElementById('apiISBN');
-  var searchAPI = document.getElementById('searchAPI');
+  var searchAPI = document.getElementById('search-input');
   var apiResults = document.getElementById('apiResults');
 
   var search = '';
@@ -32,11 +32,11 @@ function bookSearch() {
   console.log(search);
 
   $.ajax({
-    url: 'https://www.googleapis.com/books/v1/volumes?q=' + search + '&key=AIzaSyDHWfAVWQPX7UK1qgA-EZvxpQROi2uXe_w',
+    url: 'https://www.googleapis.com/books/v1/volumes?q= '+ search + '&key=AIzaSyDHWfAVWQPX7UK1qgA-EZvxpQROi2uXe_w',
     dataType: 'json',
     type: 'GET'
   }).then(function (data) {
-
+    console.log('API data:', data);
     for (i = 0; i < data.items.length; i++) {
       var cardDiv = document.createElement('div');
       var imgDiv = document.createElement('div');
@@ -95,20 +95,20 @@ function bookSearch() {
       contentDiv.append(cardPages);
       contentDiv.append(cardISBN);
       buttonDiv.append(cardButton);
-
+      apiResults.append(cardDiv);
       console.log(cardDiv.dataset.id);
     }
+  }).catch (function (err) {
+    console.log(err);
   });
 }
-
-
 window.onload = function () {
   document.getElementById('apiButton').addEventListener('click', bookSearch);
 };
 
 $(document).on('click', '.cardBtn', function () {
   event.preventDefault();
-  // console.log("Hello there");
+  console.log('Hello there');
   var cardID = $(this).data('id');
   console.log(cardID);
 
@@ -144,11 +144,11 @@ $(document).on('click', '.cardBtn', function () {
   );
 
 });
-//Send the GET request.
-$.ajax('/api/book', {
-  type: 'GET',
-}).then(
-  function (result) {
-    console.log('result', result);
-  }
-);
+// //Send the GET request.
+// $.ajax('/api/book', {
+//   type: 'GET',
+// }).then(
+//   function (result) {
+//     console.log('result', result);
+//   }
+// );
