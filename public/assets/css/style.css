@@ -1,5 +1,4 @@
 body {
-    /* background-color: white; */
     background-image: url("../images/books1.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -81,3 +80,27 @@ body {
          box-shadow: 5px 5px 3px #9E9E9E;
       
   }
+
+  #cardTitle {
+    font-family: GillSans, Calibri, Trebuchet, sans-serif;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  
+.row {
+  padding: 20px;
+  margin: 50px;
+}
+
+#cardDescription {
+  font-size: 11px;
+}
+
+#cardTitle {
+  margin: 0;
+}
+
+p{
+  margin: 4px;
+}

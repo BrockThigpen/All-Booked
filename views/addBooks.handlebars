@@ -1,5 +1,6 @@
+<script src="/assets/js/apiSearch.js"></script>
 <label for="site-search">Search Books: </label>
-<input type="search" placeholder="Looking for something?" id="site-search" name="q"
+<input type="search" placeholder="Looking for something?" id="search-input" name="q"
     aria-label="Search through site content">
 <form action="#">
     <p>
@@ -17,9 +18,16 @@
         </label>
     </p>
     <a class="waves-effect waves-light btn" id="apiButton">Go</a>
+
+
+    </div>
     <div class="row">
-        <div class="column sm12"><img src="../public/assets/images/allBookedLogo.png" class="center" height="" width="">
-            <div class="container">
+        <div class="column sm12"><img src="/assets/images/allBookedLogo.png" class="center" height="" width="">
+    </div>
+
+    <div id="apiResults"></div>
+
+            {{!-- <div class="container">
                 <div class="row">
                     <div class="col s3">
                         <p id="cardImg">*Thumbnail here*</p>
@@ -37,5 +45,5 @@
                         <a class="waves-effect waves-light btn" id="cardButton">Add Book to our Library Stock</a>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div> --}}
+    

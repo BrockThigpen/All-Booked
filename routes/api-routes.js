@@ -26,7 +26,7 @@ module.exports = app => {
 
   // route for finding book by ISBN
   app.get('/api/book/isbn/:isbn', (req, res) => {
-    db.books.findOne({
+    db.books.findAll({
       where: {
         isbn: req.params.isbn
       }
