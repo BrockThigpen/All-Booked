@@ -6,7 +6,9 @@ let selectedBook = {
   year: 0,
   description: '',
   pages: 0,
-  isbn: 0
+  isbn: 0,
+  totalCopies: 1,
+  copiesIn: 1 
 };
 
 // function revertBtn () {
@@ -80,7 +82,7 @@ function bookSearch() {
       // Defining data
       cardImg.setAttribute('src', data.items[i].volumeInfo.imageLinks.thumbnail);
       cardTitle.innerHTML += data.items[i].volumeInfo.title;
-      cardAuthor.innerHTML += data.items[i].volumeInfo.authors[0];
+      cardAuthor.innerHTML += data.items[i].volumeInfo.authors;
       cardYear.innerHTML += data.items[i].volumeInfo.publishedDate;
       cardDescription.innerHTML += data.items[i].volumeInfo.description;
       cardPages.innerHTML += data.items[i].volumeInfo.pageCount;
@@ -116,6 +118,7 @@ function bookSearch() {
       buttonDiv.append(cardButton);
 
       console.log(rowDiv.dataset.id);
+
     }
   });
 }
@@ -127,50 +130,111 @@ window.onload = function () {
 
 $(document).on('click', '.cardBtn', function () {
   event.preventDefault();
-  // console.log("Hello there");
+
+  // variable stores the id# of card clicked
   var cardID = $(this).data('id');
-  console.log(cardID);
 
-  var divNum = document.getElementsByClassName('row')[cardID];
-  selectedBook.title = divNum.getElementsByClassName('title')[0].innerText;
-  selectedBook.author = divNum.getElementsByClassName('author')[0].innerText;
-  selectedBook.year = divNum.getElementsByClassName('year')[0].innerText;
-  selectedBook.description = divNum.getElementsByClassName('description')[0].innerText;
-  selectedBook.pages = divNum.getElementsByClassName('pages')[0].innerText;
-  selectedBook.isbn = divNum.getElementsByClassName('isbn')[0].innerText;
-  selectedBook.img = divNum.getElementsByClassName('img')[0].src;
+  selectedBook.title = document.getElementsByClassName('title')[cardID].innerText;
+  selectedBook.author = document.getElementsByClassName('author')[cardID].innerText;
+  selectedBook.year = document.getElementsByClassName('year')[cardID].innerText;
+  selectedBook.description = document.getElementsByClassName('description')[cardID].innerText;
+  selectedBook.pages = document.getElementsByClassName('pages')[cardID].innerText;
+  selectedBook.isbn = document.getElementsByClassName('isbn')[cardID].innerText;
+  selectedBook.img = document.getElementsByClassName('img')[cardID].src;
 
-  console.log(selectedBook)
+  // GET API call to see if current ISBN number is already stored in db
+  $.ajax({
+    url: 'api/book/ISBN/' + selectedBook.isbn,
+    dataType: 'json',
+    type: 'GET'
 
-  //create a new object to hold the books when add a book is clicked
-  var orderedBooks = {
-    title: selectedBook.title,
-    authorName: selectedBook.author,
-    images: selectedBook.img,
-    year: selectedBook.year,
-    description: selectedBook.description,
-    pageNumbers: selectedBook.pages,
-    ISBN: selectedBook.isbn
-  };
+  }).then(function(data) {
+    console.log(data);
 
-  console.log(orderedBooks)
+    console.log("ISBN:" + selectedBook.isbn)
+    console.log(selectedBook);
 
-  // Send the POST request.
-  $.ajax('/api/book', {
-    type: 'POST',
-    data: orderedBooks
-  }).then(
-    function (data) {
-    // Reload the page to get the updated list
-      console.log('data', data);
-      document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library'
-      setTimeout(function() { 
-      document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock'
-      }, 2000);
+    // if the isbn exists in the db, update it's totalCopies and copiesIN'
+    if (data && data.length > 0) {
+
+    var dataObject = {
+      totalCopies: data[0].totalCopies + 1,
+      copiesIN: data[0].copiesIN + 1      
     }
-  );
 
-// });
+    console.log(dataObject);
+    
+    $.ajax({
+      url: 'api/book/isbn/' + selectedBook.isbn,
+      method: 'PUT',
+      data: dataObject,
+      // contentType: 'application/json'
+    }).then(function(data) {
+      console.log(data);
+      console.log('It has updated!');
+      selectedBook = {
+        title: '',
+        author: '',
+        img: '',
+        year: 0,
+        description: '',
+        pages: 0,
+        isbn: 0,
+        totalCopies: 1,
+        copiesIn: 1 
+    }
+      });
+    }
+
+    // if an empty array is returned, create new row in db with values
+    else {
+      console.log('Does not exist')
+      console.log(cardID);
+    
+      console.log(selectedBook)
+    
+      //create a new object to hold the books when add a book is clicked
+      var orderedBooks = {
+        title: selectedBook.title,
+        authorName: selectedBook.author,
+        images: selectedBook.img,
+        year: selectedBook.year,
+        description: selectedBook.description,
+        pageNumbers: selectedBook.pages,
+        ISBN: selectedBook.isbn,
+        totalCopies: selectedBook.totalCopies,
+        copiesIN: selectedBook.copiesIn
+      };
+    
+      console.log(orderedBooks)
+    
+      // Send the POST request.
+      $.ajax('/api/book', {
+        type: 'POST',
+        data: orderedBooks
+      }).then(
+        function (data) {
+        // Reload the page to get the updated list
+          console.log('data', data);
+          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library'
+          setTimeout(function() { 
+          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock'
+          }, 2000);
+          selectedBook = {
+            title: '',
+            author: '',
+            img: '',
+            year: 0,
+            description: '',
+            pages: 0,
+            isbn: 0,
+            totalCopies: 1,
+            copiesIn: 1 
+          };
+        }
+      );
+    }
+  })
 
 });
 // Send the GET request.
