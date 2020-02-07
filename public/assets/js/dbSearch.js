@@ -253,5 +253,4 @@ $.ajax('/api/book/', {
 
 }).then(function () {
   console.log('it worked');
-}
-);
+});
