@@ -16,17 +16,17 @@ module.exports = app => {
   });
 
   // route for finding book by author
-  app.get('/api/book/author/:author', (req, res) => {
+  app.get('/api/book/:authorName', (req, res) => {
     db.books.findAll({
       where: {
-        author: req.params.author
+        authorName: req.params.authorName
       }
     }).then(results => res.json(results));
   });
 
   // route for finding book by ISBN
   app.get('/api/book/isbn/:isbn', (req, res) => {
-    db.books.findOne({
+    db.books.findAll({
       where: {
         isbn: req.params.isbn
       }
@@ -42,18 +42,21 @@ module.exports = app => {
       year: req.body.year,
       description: req.body.description,
       pageNumbers: req.body.pageNumbers,
-      ISBN: req.body.ISBN
+      ISBN: req.body.ISBN,
+      totalCopies: req.body.totalCopies,
+      copiesIN: req.body.copiesIN
     }).then(results => res.json(results));
   });
 
   // route for updating num of copies
-  app.put('api/book', (res, req) => {
+  app.put('api/book/isbn/:isbn', (res, req) => {
+    console.log(res, req);
     db.books.update({
       totalCopies: req.body.totalCopies,
       copiesIN: req.body.copiesIN
     }, {
       where: {
-        id: req.params.id
+        ISBN: req.params.isbn
       }
     }).then(results => res.json(results));
   });

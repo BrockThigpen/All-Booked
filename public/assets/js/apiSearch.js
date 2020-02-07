@@ -6,15 +6,23 @@ let selectedBook = {
   year: 0,
   description: '',
   pages: 0,
-  isbn: 0
+  isbn: 0,
+  totalCopies: 1,
+  copiesIn: 1 
 };
+
+// function revertBtn () {
+//   document.getElementsByClassName('cardBtn').innerText = 'Add Book to our Library Stock';
+// }
+
 // Front end variables
 
 function bookSearch() {
+  console.log('It worked here....')
   var apiTitle = document.getElementById('apiTitle');
   var apiAuthor = document.getElementById('apiAuthor');
   var apiISBN = document.getElementById('apiISBN');
-  var searchAPI = document.getElementById('searchAPI');
+  var searchAPI = document.getElementById('search-input');
   var apiResults = document.getElementById('apiResults');
 
   var search = '';
@@ -38,7 +46,8 @@ function bookSearch() {
   }).then(function (data) {
 
     for (i = 0; i < data.items.length; i++) {
-      var cardDiv = document.createElement('div');
+      var container = document.createElement('div');
+      var rowDiv = document.createElement('div');
       var imgDiv = document.createElement('div');
       var contentDiv = document.createElement('div');
       var buttonDiv = document.createElement('div');
@@ -52,28 +61,39 @@ function bookSearch() {
       var cardButton = document.createElement('button');
 
       // Giving divs rows and columns
-      cardDiv.setAttribute('class', 'row');
-      cardDiv.setAttribute('data-id', i);
-      imgDiv.setAttribute('class', 'col s3');
-      contentDiv.setAttribute('class', 'col s6');
+      container.setAttribute('class', 'container');
+      rowDiv.setAttribute('class', 'row');
+      rowDiv.setAttribute('data-id', i);
+      imgDiv.setAttribute('class', 'col s2');
+      contentDiv.setAttribute('class', 'col s7');
       buttonDiv.setAttribute('class', 'col s3');
       cardButton.setAttribute('data-id', i);
+
+      // Adding ids
+      cardImg.setAttribute('id', 'cardImg');
+      cardTitle.setAttribute('id', 'cardTitle');
+      cardAuthor.setAttribute('id', 'cardAuthor');
+      cardYear.setAttribute('id', 'cardYear');
+      cardDescription.setAttribute('id', 'cardDescription');
+      cardPages.setAttribute('id', 'cardPages');
+      cardISBN.setAttribute('id', 'cardISBN');
+      cardButton.setAttribute('id', 'cardButton');
 
       // Defining data
       cardImg.setAttribute('src', data.items[i].volumeInfo.imageLinks.thumbnail);
       cardTitle.innerHTML += data.items[i].volumeInfo.title;
-      cardAuthor.innerHTML += data.items[i].volumeInfo.authors[0];
+      cardAuthor.innerHTML += data.items[i].volumeInfo.authors;
       cardYear.innerHTML += data.items[i].volumeInfo.publishedDate;
       cardDescription.innerHTML += data.items[i].volumeInfo.description;
       cardPages.innerHTML += data.items[i].volumeInfo.pageCount;
       cardISBN.innerHTML += data.items[i].volumeInfo.industryIdentifiers[0].identifier;
-      cardButton.innerHTML += 'ORDER BOOK!';
+      cardButton.innerHTML += 'Add Book to our Library Stock';
 
-      // Styling will not be dynamic eventually
-      cardDiv.setAttribute('style', 'border:1px solid black; width: 80%; padding: 20px; margin: 30px auto; height: auto;');
-      imgDiv.setAttribute('style', 'display: inline-block;');
-      contentDiv.setAttribute('style', 'display: inline-block;');
-      buttonDiv.setAttribute('style', 'display: inline-block;');
+      // // Styling will not be dynamic eventually
+      // cardDiv.setAttribute('style', 'border:1px solid black; width: 80%; padding: 20px; margin: 30px auto; height: auto;');
+      // imgDiv.setAttribute('style', 'display: inline-block;');
+      // contentDiv.setAttribute('style', 'display: inline-block;');
+      // buttonDiv.setAttribute('style', 'display: inline-block;');
       cardButton.setAttribute('class', 'cardBtn');
       cardTitle.setAttribute('class', 'title');
       cardAuthor.setAttribute('class', 'author');
@@ -83,10 +103,11 @@ function bookSearch() {
       cardISBN.setAttribute('class', 'isbn');
       cardImg.setAttribute('class', 'img');
 
-      apiResults.append(cardDiv);
-      cardDiv.append(imgDiv);
-      cardDiv.append(contentDiv);
-      cardDiv.append(buttonDiv);
+      apiResults.append(container);
+      container.append(rowDiv);
+      rowDiv.append(imgDiv);
+      rowDiv.append(contentDiv);
+      rowDiv.append(buttonDiv);
       imgDiv.append(cardImg);
       contentDiv.append(cardTitle);
       contentDiv.append(cardAuthor);
@@ -96,7 +117,8 @@ function bookSearch() {
       contentDiv.append(cardISBN);
       buttonDiv.append(cardButton);
 
-      console.log(cardDiv.dataset.id);
+      console.log(rowDiv.dataset.id);
+
     }
   });
 }
@@ -108,47 +130,110 @@ window.onload = function () {
 
 $(document).on('click', '.cardBtn', function () {
   event.preventDefault();
-  // console.log("Hello there");
+
+  // variable stores the id# of card clicked
   var cardID = $(this).data('id');
-  console.log(cardID);
 
-  var divNum = document.getElementsByClassName('row')[cardID];
-  selectedBook.title = divNum.getElementsByClassName('title')[0].innerText;
-  selectedBook.author = divNum.getElementsByClassName('author')[0].innerText;
-  selectedBook.year = divNum.getElementsByClassName('year')[0].innerText;
-  selectedBook.description = divNum.getElementsByClassName('description')[0].innerText;
-  selectedBook.pages = divNum.getElementsByClassName('pages')[0].innerText;
-  selectedBook.isbn = divNum.getElementsByClassName('isbn')[0].innerText;
-  selectedBook.img = divNum.getElementsByClassName('img')[0].src;
+  selectedBook.title = document.getElementsByClassName('title')[cardID].innerText;
+  selectedBook.author = document.getElementsByClassName('author')[cardID].innerText;
+  selectedBook.year = document.getElementsByClassName('year')[cardID].innerText;
+  selectedBook.description = document.getElementsByClassName('description')[cardID].innerText;
+  selectedBook.pages = document.getElementsByClassName('pages')[cardID].innerText;
+  selectedBook.isbn = document.getElementsByClassName('isbn')[cardID].innerText;
+  selectedBook.img = document.getElementsByClassName('img')[cardID].src;
 
-  //create a new object to hold the books when add a book is clicked
-  var orderedBooks = {
-    title: selectedBook.title,
-    authorName: selectedBook.author,
-    images: selectedBook.img,
-    year: selectedBook.year,
-    description: selectedBook.description,
-    pageNumbers: selectedBook.pages,
-    ISBN: selectedBook.isbn
-  };
+  // GET API call to see if current ISBN number is already stored in db
+  $.ajax({
+    url: 'api/book/ISBN/' + selectedBook.isbn,
+    dataType: 'json',
+    type: 'GET'
 
-  //Send the POST request.
-  $.ajax('/api/book', {
-    type: 'POST',
-    data: orderedBooks
-  }).then(
-    function (data) {
-    // Reload the page to get the updated list
-      console.log('data', data);
+  }).then(function(data) {
+    console.log(data);
+
+    console.log("ISBN:" + selectedBook.isbn)
+    console.log(selectedBook);
+
+    // if the isbn exists in the db, update it's totalCopies and copiesIN'
+    if (data && data.length > 0) {
+
+    var dataObject = {
+      totalCopies: data[0].totalCopies + 1,
+      copiesIN: data[0].copiesIN + 1      
     }
-  );
+
+    console.log(dataObject);
+    
+    $.ajax({
+      url: 'api/book/isbn/' + selectedBook.isbn,
+      method: 'PUT',
+      data: dataObject,
+      // contentType: 'application/json'
+    }).then(function(data) {
+      console.log(data);
+      console.log('It has updated!');
+      selectedBook = {
+        title: '',
+        author: '',
+        img: '',
+        year: 0,
+        description: '',
+        pages: 0,
+        isbn: 0,
+        totalCopies: 1,
+        copiesIn: 1 
+    }
+      });
+    }
+
+    // if an empty array is returned, create new row in db with values
+    else {
+      console.log('Does not exist')
+      console.log(cardID);
+    
+      console.log(selectedBook)
+    
+      //create a new object to hold the books when add a book is clicked
+      var orderedBooks = {
+        title: selectedBook.title,
+        authorName: selectedBook.author,
+        images: selectedBook.img,
+        year: selectedBook.year,
+        description: selectedBook.description,
+        pageNumbers: selectedBook.pages,
+        ISBN: selectedBook.isbn,
+        totalCopies: selectedBook.totalCopies,
+        copiesIN: selectedBook.copiesIn
+      };
+    
+      console.log(orderedBooks)
+    
+      // Send the POST request.
+      $.ajax('/api/book', {
+        type: 'POST',
+        data: orderedBooks
+      }).then(
+        function (data) {
+        // Reload the page to get the updated list
+          console.log('data', data);
+          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library'
+          setTimeout(function() { 
+          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock'
+          }, 2000);
+          selectedBook = {
+            title: '',
+            author: '',
+            img: '',
+            year: 0,
+            description: '',
+            pages: 0,
+            isbn: 0,
+            totalCopies: 1,
+            copiesIn: 1 
+          };
+        }
+      );
+    }
+  })
 
 });
-//Send the GET request.
-$.ajax('/api/book', {
-  type: 'GET',
-}).then(
-  function (result) {
-    console.log('result', result);
-  }
-);

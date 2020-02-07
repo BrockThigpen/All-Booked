@@ -1,24 +1,25 @@
+<script src="assets/js/dbSearch.js"></script>
 <label for="site-search">Search Books: </label>
 <input type="search" placeholder="Looking for something?" id="site-search" name="q"
     aria-label="Search through site content">
 <form action="#">
     <p>
         <label>
-            <input name="group1" class="rB" type="radio" id="apiTitle" checked />
+            <input name="group1" class="rB" type="radio" id="dbTitle" checked />
             <span>Title</span>
         </label>
         <label>
-            <input name="group1" class="rB" type="radio" id="apiAuthor" checked />
+            <input name="group1" class="rB" type="radio" id="dbAuthor" checked />
             <span>Author</span>
         </label>
         <label>
-            <input name="group1" class="rB" type="radio" id="apiISBN" checked />
+            <input name="group1" class="rB" type="radio" id="dbISBN" checked />
             <span>ISBN</span>
         </label>
     </p>
-    <a class="waves-effect waves-light btn" id="apiButton">Go</a>
+    <a class="waves-effect waves-light btn" id="dbButton">Go</a>
     <div class="row">
-        <div class="column sm12"><img src="../public/assets/images/allBookedLogo.png" class="center" height="" width="">
+        <div class="column sm12"><img src="/assets/images/allBookedLogo.png" class="center" height="" width="">
             <center>
                 <p id="addToLibrary">Can't find the book you're looking for? No Worries! Click here to add a book to our
                     library
@@ -28,7 +29,10 @@
                 <p><a class="btn-floating waves-effect waves-light" id="goToButton"><i class="material-icons">+</i></a>
                 </p>
             </center>
-            <div class="container">
+
+            <div id="dbResults"></div>
+
+            {{!-- <div class="container">
                 <div class="row">
                     <div class="col s3">
                         <p id="cardImg">*Thumbnail here*</p>
@@ -47,4 +51,4 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
