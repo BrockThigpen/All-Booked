@@ -143,6 +143,23 @@ $(document).on('click', '.cardBtn', function () {
     }
   );
 
+
+  var id = $(this).data('id');
+
+  var neweatState = {
+    totalCopies: totalCopies ++,
+    copiesIN: copiesIN ++,
+  };
+
+  // Send the PUT request.
+  $.ajax('/api/book/' + id, {
+    type: 'PUT',
+    data: neweatState
+  }).then(
+    function(result) {
+      console.log('log',result);
+
+    });
 });
 // //Send the GET request.
 // $.ajax('/api/book', {

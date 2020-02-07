@@ -23,11 +23,11 @@ function dbBookSearch() {
   if (apiKeyword.checked) {
     search = searchAPI.value;
   } else if (apiTitle.checked) {
-    search = searchAPI.value;
+    search = 'title/' + searchAPI.value;
   } else if (apiAuthor.checked) {
-    search = 'authorName:' + searchAPI.value;
+    search = 'author/' + searchAPI.value;
   } else if (apiISBN.checked) {
-    search = 'ISBN:' + searchAPI.value;
+    search = 'isbn/' + searchAPI.value;
   } else {
     alert('Select a search category.');
   }
@@ -65,7 +65,6 @@ function dbBookSearch() {
 
       // Defining data
       cardImg.setAttribute('src', data[i].images);
-      //cardImg.setAttribute('src', data[i].images);
       cardTitle.innerHTML += data[i].title;
       cardAuthor.innerHTML += data[i].authorName;
       cardYear.innerHTML += data[i].year;
@@ -120,3 +119,4 @@ $.ajax('/api/book/', {
 window.onload = function () {
   document.getElementById('apiButton').addEventListener('click', dbBookSearch);
 };
+
