@@ -64,12 +64,50 @@ module.exports = app => {
     }).then(results => res.json(results));
   });
 
-  // route for updating num of copies
-  app.put('api/book/:id', (res, req) => {
-    db.books.update({
-      where: {
-        id: req.params.id
-      }
-    }).then(results => res.json(results));
+
+  // route for adding a book
+  app.post('/api/book', (req, res) => {
+    db.books.findOrCreate(
+      orderedBooks = {
+        title: req.body.title,
+        authorName: req.body.authorName,
+        images: req.body.images,
+        year: req.body.year,
+        description: req.body.description,
+        pageNumbers: req.body.pageNumbers,
+        ISBN: req.body.ISBN,
+        totalCopies: +1,
+        copiesIN: +1,
+        where: {
+          title: req.body.title,
+          authorName: req.body.authorName,
+          images: req.body.images,
+          year: req.body.year,
+          description: req.body.description,
+          pageNumbers: req.body.pageNumbers,
+          ISBN: req.body.ISBN,
+          totalCopies: +1,
+          copiesIN: +1,
+        }
+      }).then(results => {
+      res.json(results);
+      console.log('match:', results);
+
+      console.log('already exist');
+      //}
+    });
+    // route for updating num of copies
+    app.put('api/book/:id', (res, req) => {
+      // eslint-disable-next-line no-trailing-spaces
+      db.books.update({      
+        where:{
+          id: req.books.id
+        }
+      }).then(results => res.json(results));
+    });
+
   });
+
 };
+
+
