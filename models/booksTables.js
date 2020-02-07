@@ -2,7 +2,7 @@ module.exports = function (sequelize, DataTypes) {
   var Books = sequelize.define('books', {
     title: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
@@ -10,14 +10,14 @@ module.exports = function (sequelize, DataTypes) {
 
     authorName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
     },
     description : {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
@@ -31,14 +31,14 @@ module.exports = function (sequelize, DataTypes) {
     },
     images : {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }
     },
     pageNumbers : {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
       validate: {
         len: [1]
       }

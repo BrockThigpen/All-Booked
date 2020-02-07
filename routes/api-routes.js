@@ -1,25 +1,37 @@
 const db = require('../models');
+const Sequilize = require('sequelize');
+const Op = Sequilize.Op;
 
 module.exports = app => {
-  // route for viewing all books
-  app.get('/api/book', (req, res) => {
-    db.books.findAll({}).then( results => res.json(results));
+
+  app.get('/api/book/', function (req, res) {
+    db.books.findAll({})
+      .then(function (dbBooks) {
+        res.json(dbBooks);
+        console.log('getBooks' + dbBooks);
+      });
   });
 
   // route for finding books by title
   app.get('/api/book/title/:title', (req, res) => {
+    var title = req.params.title;
+
     db.books.findAll({
       where: {
-        title: req.params.title
+        title: { [Op.like]: '%' + title + '%' }
       }
-    }).then(results => res.json(results));
+
+    }).then(function (results) {
+      res.json(results);
+    });
   });
 
   // route for finding book by author
-  app.get('/api/book/:authorName', (req, res) => {
+  app.get('/api/book/author/:authorName', (req, res) => {
+    var author = req.params.authorName;
     db.books.findAll({
       where: {
-        authorName: req.params.authorName
+        authorName: { [Op.like]: '%' + author + '%' }
       }
     }).then(results => res.json(results));
   });
@@ -48,16 +60,17 @@ module.exports = app => {
     }).then(results => res.json(results));
   });
 
-  // route for updating num of copies
-  app.put('/api/book/isbn/:isbn', (res, req) => {
-    console.log(res, req);
-    db.books.update({
-      totalCopies: req.body.totalCopies,
-      copiesIN: req.body.copiesIN
-    }, {
-      where: {
-        ISBN: req.params.isbn
+  app.put('/api/books/isbn/:isbn', function (req, res) {
+    db.books.update(
+      req.body,
+      {
+        where: {
+          ISBN: req.params.isbn
+        }
       }
-    }).then(results => res.json(results));
+    )
+      .then(function (dbPost) {
+        res.json(dbPost);
+      });
   });
 };

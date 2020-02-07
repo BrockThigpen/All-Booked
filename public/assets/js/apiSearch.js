@@ -11,12 +11,7 @@ let selectedBook = {
   copiesIn: 1
 };
 
-// function revertBtn () {
-//   document.getElementsByClassName('cardBtn').innerText = 'Add Book to our Library Stock';
-// }
-
 // Front end variables
-
 function bookSearch() {
   console.log('It worked here....');
   var apiTitle = document.getElementById('apiTitle');
@@ -65,8 +60,11 @@ function bookSearch() {
       rowDiv.setAttribute('class', 'row');
       rowDiv.setAttribute('data-id', i);
       imgDiv.setAttribute('class', 'col s2');
-      contentDiv.setAttribute('class', 'col s7');
-      buttonDiv.setAttribute('class', 'col s3');
+      contentDiv.setAttribute('class', 'col s6');
+      buttonDiv.setAttribute('class', 'col s4');
+      cardButton.setAttribute('class', 'cardBtn btn waves-effect waves-light');
+      cardButton.setAttribute('type', 'submit');
+      cardButton.setAttribute('name', 'action');
       cardButton.setAttribute('data-id', i);
 
       // Adding ids
@@ -77,7 +75,6 @@ function bookSearch() {
       cardDescription.setAttribute('id', 'cardDescription');
       cardPages.setAttribute('id', 'cardPages');
       cardISBN.setAttribute('id', 'cardISBN');
-      cardButton.setAttribute('id', 'cardButton');
 
       // Defining data
       cardImg.setAttribute('src', data.items[i].volumeInfo.imageLinks.thumbnail);
@@ -89,12 +86,6 @@ function bookSearch() {
       cardISBN.innerHTML += data.items[i].volumeInfo.industryIdentifiers[0].identifier;
       cardButton.innerHTML += 'Add Book to our Library Stock';
 
-      // // Styling will not be dynamic eventually
-      // cardDiv.setAttribute('style', 'border:1px solid black; width: 80%; padding: 20px; margin: 30px auto; height: auto;');
-      // imgDiv.setAttribute('style', 'display: inline-block;');
-      // contentDiv.setAttribute('style', 'display: inline-block;');
-      // buttonDiv.setAttribute('style', 'display: inline-block;');
-      cardButton.setAttribute('class', 'cardBtn');
       cardTitle.setAttribute('class', 'title');
       cardAuthor.setAttribute('class', 'author');
       cardYear.setAttribute('class', 'year');
@@ -122,7 +113,6 @@ function bookSearch() {
     }
   });
 }
-
 
 window.onload = function () {
   document.getElementById('apiButton').addEventListener('click', bookSearch);
@@ -165,8 +155,8 @@ $(document).on('click', '.cardBtn', function () {
       console.log(dataObject);
 
       $.ajax({
-        url: 'api/book/isbn/' + selectedBook.isbn,
         method: 'PUT',
+        url: 'api/books/isbn/' + selectedBook.isbn,
         data: dataObject,
         // contentType: 'application/json'
       }).then(function (data) {
