@@ -236,15 +236,6 @@ $(document).on('click', '.cardBtn', function () {
       );
     }
   })
-
 });
 
 
-// Send the GET request.
-// $.ajax('/api/book', {
-//   type: 'GET',
-// }).then(
-//   function (result) {
-//     console.log('result', result);
-//   }
-// );
