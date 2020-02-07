@@ -8,7 +8,7 @@ let selectedBook = {
   pages: 0,
   isbn: 0,
   totalCopies: 1,
-  copiesIn: 1 
+  copiesIn: 1
 };
 
 // function revertBtn () {
@@ -65,8 +65,11 @@ function bookSearch() {
       rowDiv.setAttribute('class', 'row');
       rowDiv.setAttribute('data-id', i);
       imgDiv.setAttribute('class', 'col s2');
-      contentDiv.setAttribute('class', 'col s7');
-      buttonDiv.setAttribute('class', 'col s3');
+      contentDiv.setAttribute('class', 'col s6');
+      buttonDiv.setAttribute('class', 'col s4');
+      cardButton.setAttribute('class', 'cardBtn btn waves-effect waves-light');
+      cardButton.setAttribute('type', 'submit');
+      cardButton.setAttribute('name', 'action');
       cardButton.setAttribute('data-id', i);
 
       // Adding ids
@@ -77,7 +80,6 @@ function bookSearch() {
       cardDescription.setAttribute('id', 'cardDescription');
       cardPages.setAttribute('id', 'cardPages');
       cardISBN.setAttribute('id', 'cardISBN');
-      cardButton.setAttribute('id', 'cardButton');
 
       // Defining data
       cardImg.setAttribute('src', data.items[i].volumeInfo.imageLinks.thumbnail);
@@ -94,7 +96,6 @@ function bookSearch() {
       // imgDiv.setAttribute('style', 'display: inline-block;');
       // contentDiv.setAttribute('style', 'display: inline-block;');
       // buttonDiv.setAttribute('style', 'display: inline-block;');
-      cardButton.setAttribute('class', 'cardBtn');
       cardTitle.setAttribute('class', 'title');
       cardAuthor.setAttribute('class', 'author');
       cardYear.setAttribute('class', 'year');
@@ -148,7 +149,7 @@ $(document).on('click', '.cardBtn', function () {
     dataType: 'json',
     type: 'GET'
 
-  }).then(function(data) {
+  }).then(function (data) {
     console.log(data);
 
     console.log("ISBN:" + selectedBook.isbn)
@@ -157,32 +158,32 @@ $(document).on('click', '.cardBtn', function () {
     // if the isbn exists in the db, update it's totalCopies and copiesIN'
     if (data && data.length > 0) {
 
-    var dataObject = {
-      totalCopies: data[0].totalCopies + 1,
-      copiesIN: data[0].copiesIN + 1      
-    }
+      var dataObject = {
+        totalCopies: data[0].totalCopies + 1,
+        copiesIN: data[0].copiesIN + 1
+      }
 
-    console.log(dataObject);
-    
-    $.ajax({
-      url: 'api/book/isbn/' + selectedBook.isbn,
-      method: 'PUT',
-      data: dataObject,
-      // contentType: 'application/json'
-    }).then(function(data) {
-      console.log(data);
-      console.log('It has updated!');
-      selectedBook = {
-        title: '',
-        author: '',
-        img: '',
-        year: 0,
-        description: '',
-        pages: 0,
-        isbn: 0,
-        totalCopies: 1,
-        copiesIn: 1 
-    }
+      console.log(dataObject);
+
+      $.ajax({
+        method: 'PUT',
+        url: 'api/books/isbn/' + selectedBook.isbn,
+        data: dataObject,
+        // contentType: 'application/json'
+      }).then(function (data) {
+        console.log(data);
+        console.log('It has updated!');
+        selectedBook = {
+          title: '',
+          author: '',
+          img: '',
+          year: 0,
+          description: '',
+          pages: 0,
+          isbn: 0,
+          totalCopies: 1,
+          copiesIn: 1
+        }
       });
     }
 
@@ -190,9 +191,9 @@ $(document).on('click', '.cardBtn', function () {
     else {
       console.log('Does not exist')
       console.log(cardID);
-    
+
       console.log(selectedBook)
-    
+
       //create a new object to hold the books when add a book is clicked
       var orderedBooks = {
         title: selectedBook.title,
@@ -205,20 +206,20 @@ $(document).on('click', '.cardBtn', function () {
         totalCopies: selectedBook.totalCopies,
         copiesIN: selectedBook.copiesIn
       };
-    
+
       console.log(orderedBooks)
-    
+
       // Send the POST request.
       $.ajax('/api/book', {
         type: 'POST',
         data: orderedBooks
       }).then(
         function (data) {
-        // Reload the page to get the updated list
+          // Reload the page to get the updated list
           console.log('data', data);
           document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library'
-          setTimeout(function() { 
-          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock'
+          setTimeout(function () {
+            document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock'
           }, 2000);
           selectedBook = {
             title: '',
@@ -229,7 +230,7 @@ $(document).on('click', '.cardBtn', function () {
             pages: 0,
             isbn: 0,
             totalCopies: 1,
-            copiesIn: 1 
+            copiesIn: 1
           };
         }
       );
@@ -237,6 +238,8 @@ $(document).on('click', '.cardBtn', function () {
   })
 
 });
+
+
 // Send the GET request.
 // $.ajax('/api/book', {
 //   type: 'GET',

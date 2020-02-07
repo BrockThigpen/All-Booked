@@ -104,3 +104,20 @@ body {
 p{
   margin: 4px;
 }
+
+#site-search {
+  padding: 0 10px;
+  margin: 20px 0;
+}
+
+.copiesIn {
+  display: inline-block
+}
+
+.outOf {
+  display: inline-block;
+}
+
+.totalCopies {
+  display: inline-block
+}

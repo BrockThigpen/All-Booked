@@ -9,9 +9,6 @@
 // };
 // Front end variables
 
-window.onload = function () {
-    document.getElementById('dbButton').addEventListener('click', dbBookSearch);
-  };
 
 function dbBookSearch() {
     var dbTitle = document.getElementById('dbTitle');
@@ -57,6 +54,9 @@ function dbBookSearch() {
         var cardPages = document.createElement('p');
         var cardISBN = document.createElement('p');
         var cardButton = document.createElement('button');
+        var copiesIn = document.createElement('p');
+        var outOf = document.createElement('p');
+        var totalCopies = document.createElement('p');
   
         // Giving divs rows and columns
         container.setAttribute('class', 'container');
@@ -66,6 +66,9 @@ function dbBookSearch() {
         contentDiv.setAttribute('class', 'col s7');
         buttonDiv.setAttribute('class', 'col s3');
         cardButton.setAttribute('data-id', i);
+        copiesIn.setAttribute('class', 'copiesIn');
+        outOf.setAttribute('class', 'outOf');
+        totalCopies.setAttribute('class', 'totalCopies');
   
         // Adding ids
         cardImg.setAttribute('id', 'cardImg');
@@ -80,19 +83,22 @@ function dbBookSearch() {
         // Defining data
         cardImg.setAttribute('src', data[i].images);
         cardTitle.innerHTML += data[i].title;
-        cardAuthor.innerHTML += data[i].authorName;
-        cardYear.innerHTML += data[i].year;
+        cardAuthor.innerHTML += 'Author(s): ' + data[i].authorName;
+        cardYear.innerHTML += 'Date Published: ' + data[i].year;
         cardDescription.innerHTML += data[i].description;
-        cardPages.innerHTML += data[i].pageNumbers;
+        cardPages.innerHTML += data[i].pageNumbers + ' pages';
         cardISBN.innerHTML += data[i].ISBN;
         cardButton.innerHTML += 'Check Out Book!';
+        copiesIn.innerHTML += data[i].copiesIN;
+        outOf.innerHTML += ' copies in out of '
+        totalCopies.innerHTML += data[i].totalCopies;
   
         // // Styling will not be dynamic eventually
         // cardDiv.setAttribute('style', 'border:1px solid black; width: 80%; padding: 20px; margin: 30px auto; height: auto;');
         // imgDiv.setAttribute('style', 'display: inline-block;');
         // contentDiv.setAttribute('style', 'display: inline-block;');
         // buttonDiv.setAttribute('style', 'display: inline-block;');
-        cardButton.setAttribute('class', 'cardBtn');
+        cardButton.setAttribute('class', 'cardBtn btn waves-effect waves-light');
         cardTitle.setAttribute('class', 'title');
         cardAuthor.setAttribute('class', 'author');
         cardYear.setAttribute('class', 'year');
@@ -113,16 +119,56 @@ function dbBookSearch() {
         contentDiv.append(cardDescription);
         contentDiv.append(cardPages);
         contentDiv.append(cardISBN);
+        contentDiv.append(copiesIn);
+        contentDiv.append(outOf);
+        contentDiv.append(totalCopies);
         buttonDiv.append(cardButton);
   
         console.log(rowDiv.dataset.id);
       }
     });
   }
+
+  window.onload = function () {
+    document.getElementById('dbButton').addEventListener('click', dbBookSearch);
+  };
+
+  $(document).on('click', '.cardBtn', function () {
+    event.preventDefault();
   
-  
+    // variable stores the id# of card clicked
+    var cardID = $(this).data('id');
+    let cardISBN = document.getElementsByClassName('isbn')[cardID].innerText;
+
+    console.log('card ISBN' + cardISBN);
+
+    var dataObject = {
+      copiesIN: document.getElementsByClassName('copiesIn')[cardID].innerText - 1
+    }
+
+    console.log('copies in' + dataObject.copiesIN);
+
+    $.ajax({
+      method: 'PUT',
+      url: 'api/books/isbn/' + cardISBN,
+      data: dataObject,
+      // contentType: 'application/json'
+    }).then(function (data) {
+      console.log(data);
+      console.log('It has updated!');
+      $.ajax({
+        url: 'api/book/ISBN/' + cardISBN,
+        dataType: 'json',
+        type: 'GET'
+      }).then(function (data) {
+        document.getElementsByClassName('copiesIn')[cardID].innerHTML = data[0].copiesIN;
+        console.log(data);
+      });
+
+    });
+  });
   //});
-  
+
   
   $.ajax('/api/book/', {
     type: 'GET',

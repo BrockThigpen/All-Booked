@@ -1,3 +1,4 @@
+<script src="/assets/js/dbSearch.js"></script>
 <div class="row">
     <div class="column sm12"><img src="/assets/images/allBookedLogo.png" class="center" height="" width="">
       <div class="row">
@@ -8,29 +9,33 @@
           <p></p>
         </div>
         <div class="col s12 m4 l8">
-          <p>
-            <form id="search" class="form-inline">
-              <div class="form-group mx-sm-3">
-                <label for="search-input" class="sr-only">Search:</label>
-                <input type="text" class="form-control" id="search-input" placeholder="Search your favorite books!">
-                <form action="#">
-                  <p>
+                      <center>
+                <p id="addToLibrary">Can't find the book you're looking for? No Worries! Click here to add a book to our
+                    library
+                    stock!</p>
+            </center>
+            <center>
+                <p><a class="btn-floating waves-effect waves-light" id="goToButton"><i class="material-icons" onclick="window.location.href='/add'">+</i></a>
+                </p>
+            </center>
+        </div>
+        <div class="row">
+                <input type="text" id="site-search" placeholder="Search your favorite books!">
                     <label>
-                      <input name="group1" class="rB" type="radio" id="apiTitle" />
+                      <input class="rB" type="radio" id="dbTitle" />
                       <span>Title</span>
                     </label>
                     <label>
-                      <input name="group1" class="rB" type="radio" id="apiAuthor" />
+                      <input class="rB" type="radio" id="dbAuthor" />
                       <span>Author</span>
                     </label>
                     <label>
-                      <input name="group1" class="rB" type="radio" id="apiISBN" />
+                      <input class="rB" type="radio" id="dbISBN" />
                       <span>ISBN</span>
                     </label>
                   </p>
-              </div>
-              <button type="submit" id="apiButton" class="btn btn-primary ml-2">Go</button>
-        </div>
-        </form>
+              <button id="dbButton" class="btn btn-primary ml-2">Go</button>
     </p>
 </div>
+
+<div id="dbResults"></div>

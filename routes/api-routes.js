@@ -49,15 +49,42 @@ module.exports = app => {
   });
 
   // route for updating num of copies
-  app.put('api/book/isbn/:isbn', (res, req) => {
-    console.log(res, req);
-    db.books.update({
-      totalCopies: req.body.totalCopies,
-      copiesIN: req.body.copiesIN
-    }, {
-      where: {
-        ISBN: req.params.isbn
-      }
-    }).then(results => res.json(results));
-  });
-};
+  // app.put('api/book/isbn/:isbn', (res, req) => {
+  //   console.log(res, req);
+  //   db.books.update({
+  //     totalCopies: req.body.totalCopies,
+  //     copiesIN: req.body.copiesIN
+  //   }, {
+  //     where: {
+  //       ISBN: req.params.isbn
+  //     }
+  //   }).then(results => res.json(results));
+  // });
+
+
+//   app.delete("/api/books/isbn/:isbn", function(req, res) {
+//   db.books.destroy({
+//     where: {
+//       ISBN: req.params.isbn
+//     }
+//   })
+//     .then(function(dbPost) {
+//       res.json(dbPost);
+//     });
+// });
+
+
+app.put("/api/books/isbn/:isbn", function(req, res) {
+  db.books.update(
+    req.body,
+    { where: {
+      ISBN: req.params.isbn
+    }
+    }
+  )
+    .then(function(dbPost) {
+      res.json(dbPost);
+    });
+});
+
+}
