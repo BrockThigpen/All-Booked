@@ -2,7 +2,6 @@ const db = require('../models');
 const Sequilize = require('sequelize');
 const Op = Sequilize.Op;
 
-
 module.exports = app => {
 
   app.get('/api/book/', function (req, res) {
@@ -13,10 +12,8 @@ module.exports = app => {
       });
   });
 
-
   // route for finding books by title
   app.get('/api/book/title/:title', (req, res) => {
-    //console.log('res', req.params.title);
     var title = req.params.title;
 
     db.books.findAll({
@@ -26,14 +23,12 @@ module.exports = app => {
 
     }).then(function (results) {
       res.json(results);
-      //console.log('result', results)
     });
   });
 
   // route for finding book by author
   app.get('/api/book/author/:authorName', (req, res) => {
     var author = req.params.authorName;
-    //console.log(author)
     db.books.findAll({
       where: {
         authorName: { [Op.like]: '%' + author + '%' }
@@ -65,43 +60,17 @@ module.exports = app => {
     }).then(results => res.json(results));
   });
 
-  // route for updating num of copies
-  // app.put('api/book/isbn/:isbn', (res, req) => {
-  //   console.log(res, req);
-  //   db.books.update({
-  //     totalCopies: req.body.totalCopies,
-  //     copiesIN: req.body.copiesIN
-  //   }, {
-  //     where: {
-  //       ISBN: req.params.isbn
-  //     }
-  //   }).then(results => res.json(results));
-  // });
-
-
-//   app.delete("/api/books/isbn/:isbn", function(req, res) {
-//   db.books.destroy({
-//     where: {
-//       ISBN: req.params.isbn
-//     }
-//   })
-//     .then(function(dbPost) {
-//       res.json(dbPost);
-//     });
-// });
-
-
-app.put("/api/books/isbn/:isbn", function(req, res) {
-  db.books.update(
-    req.body,
-    { where: {
-      ISBN: req.params.isbn
-    }
-    }
-  )
-    .then(function(dbPost) {
-      res.json(dbPost);
-    });
-});
-
-}
+  app.put('/api/books/isbn/:isbn', function (req, res) {
+    db.books.update(
+      req.body,
+      {
+        where: {
+          ISBN: req.params.isbn
+        }
+      }
+    )
+      .then(function (dbPost) {
+        res.json(dbPost);
+      });
+  });
+};

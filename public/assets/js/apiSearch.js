@@ -11,14 +11,9 @@ let selectedBook = {
   copiesIn: 1
 };
 
-// function revertBtn () {
-//   document.getElementsByClassName('cardBtn').innerText = 'Add Book to our Library Stock';
-// }
-
 // Front end variables
-
 function bookSearch() {
-  console.log('It worked here....')
+  console.log('It worked here....');
   var apiTitle = document.getElementById('apiTitle');
   var apiAuthor = document.getElementById('apiAuthor');
   var apiISBN = document.getElementById('apiISBN');
@@ -91,11 +86,6 @@ function bookSearch() {
       cardISBN.innerHTML += data.items[i].volumeInfo.industryIdentifiers[0].identifier;
       cardButton.innerHTML += 'Add Book to our Library Stock';
 
-      // // Styling will not be dynamic eventually
-      // cardDiv.setAttribute('style', 'border:1px solid black; width: 80%; padding: 20px; margin: 30px auto; height: auto;');
-      // imgDiv.setAttribute('style', 'display: inline-block;');
-      // contentDiv.setAttribute('style', 'display: inline-block;');
-      // buttonDiv.setAttribute('style', 'display: inline-block;');
       cardTitle.setAttribute('class', 'title');
       cardAuthor.setAttribute('class', 'author');
       cardYear.setAttribute('class', 'year');
@@ -124,7 +114,6 @@ function bookSearch() {
   });
 }
 
-
 window.onload = function () {
   document.getElementById('apiButton').addEventListener('click', bookSearch);
 };
@@ -145,14 +134,14 @@ $(document).on('click', '.cardBtn', function () {
 
   // GET API call to see if current ISBN number is already stored in db
   $.ajax({
-    url: 'api/book/ISBN/' + selectedBook.isbn,
+    url: 'api/book/isbn/' + selectedBook.isbn,
     dataType: 'json',
     type: 'GET'
 
   }).then(function (data) {
     console.log(data);
 
-    console.log("ISBN:" + selectedBook.isbn)
+    console.log('ISBN:' + selectedBook.isbn);
     console.log(selectedBook);
 
     // if the isbn exists in the db, update it's totalCopies and copiesIN'
@@ -161,7 +150,7 @@ $(document).on('click', '.cardBtn', function () {
       var dataObject = {
         totalCopies: data[0].totalCopies + 1,
         copiesIN: data[0].copiesIN + 1
-      }
+      };
 
       console.log(dataObject);
 
@@ -183,16 +172,14 @@ $(document).on('click', '.cardBtn', function () {
           isbn: 0,
           totalCopies: 1,
           copiesIn: 1
-        }
+        };
       });
-    }
-
     // if an empty array is returned, create new row in db with values
-    else {
-      console.log('Does not exist')
+    } else {
+      console.log('Does not exist');
       console.log(cardID);
 
-      console.log(selectedBook)
+      console.log(selectedBook);
 
       //create a new object to hold the books when add a book is clicked
       var orderedBooks = {
@@ -207,7 +194,7 @@ $(document).on('click', '.cardBtn', function () {
         copiesIN: selectedBook.copiesIn
       };
 
-      console.log(orderedBooks)
+      console.log(orderedBooks);
 
       // Send the POST request.
       $.ajax('/api/book', {
@@ -217,9 +204,9 @@ $(document).on('click', '.cardBtn', function () {
         function (data) {
           // Reload the page to get the updated list
           console.log('data', data);
-          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library'
+          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library';
           setTimeout(function () {
-            document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock'
+            document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock';
           }, 2000);
           selectedBook = {
             title: '',
@@ -235,5 +222,5 @@ $(document).on('click', '.cardBtn', function () {
         }
       );
     }
-  })
+  });
 });
