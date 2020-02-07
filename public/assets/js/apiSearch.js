@@ -144,7 +144,7 @@ $(document).on('click', '.cardBtn', function () {
 
   // GET API call to see if current ISBN number is already stored in db
   $.ajax({
-    url: 'api/book/ISBN/' + selectedBook.isbn,
+    url: 'api/book/isbn/' + selectedBook.isbn,
     dataType: 'json',
     type: 'GET'
 
