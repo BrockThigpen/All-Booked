@@ -87,7 +87,9 @@ function dbBookSearch() {
         totalCopies.innerHTML += data[i].totalCopies;
 
         checkOut.setAttribute('class', 'checkOut btn waves-effect waves-light');
+        checkOut.setAttribute('style', 'margin-bottom: 15px; float: right');
         checkIn.setAttribute('class', 'checkIn btn waves-effect waves-light');
+        checkIn.setAttribute('style', 'float: right');
         cardTitle.setAttribute('class', 'title');
         cardAuthor.setAttribute('class', 'author');
         cardYear.setAttribute('class', 'year');
