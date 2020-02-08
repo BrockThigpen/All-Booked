@@ -1,36 +1,36 @@
 <script src="/assets/js/apiSearch.js"></script>
 <div class="searchField">
-<label for="site-search">Search Books: </label>
-<input type="search" placeholder="Looking for something?" id="search-input" name="q"
-    aria-label="Search through site content">
-<form action="#">
-    <p>
-        <label>
-            <input name="group1" class="rB" type="radio" id="apiTitle" checked />
-            <span>Title</span>
-        </label>
-        <label>
-            <input name="group1" class="rB" type="radio" id="apiAuthor" checked />
-            <span>Author</span>
-        </label>
-        <label>
-            <input name="group1" class="rB" type="radio" id="apiISBN" checked />
-            <span>ISBN</span>
-        </label>
-    </p>
-    <a class="waves-effect waves-light btn darken" id="apiButton">Go</a>
-    </div>
-    
+    <label for="site-search">Search Books: </label>
+    <input type="search" placeholder="Looking for something?" id="search-input" name="q"
+        aria-label="Search through site content">
+    <form action="#">
+        <p>
+            <label>
+                <input name="group1" class="rB" type="radio" id="apiTitle" checked />
+                <span>Title</span>
+            </label>
+            <label>
+                <input name="group1" class="rB" type="radio" id="apiAuthor" checked />
+                <span>Author</span>
+            </label>
+            <label>
+                <input name="group1" class="rB" type="radio" id="apiISBN" checked />
+                <span>ISBN</span>
+            </label>
+        </p>
+        <a class="waves-effect waves-light btn darken" id="apiButton">Go</a>
+</div>
 
 
-    </div>
-    <div class="row">
-        <div class="column sm12"><img src="/assets/images/allBookedLogo.png" class="center" height="" width="">
+
+</div>
+<div class="row">
+    <div class="column sm12"><img src="/assets/images/allBookedLogo.png" class="center" height="" width="">
     </div>
 
     <div id="apiResults"></div>
 
-            {{!-- <div class="container">
+    {{!-- <div class="container">
                 <div class="row">
                     <div class="col s3">
                         <p id="cardImg">*Thumbnail here*</p>
@@ -49,4 +49,3 @@
                     </div>
                 </div>
             </div> --}}
-    
