@@ -163,11 +163,6 @@ p{
 .addMargin {
   margin-bottom: 30px;
 }
-.changeWidth {
-  width: 60%;
-  margin-top: 0;
-  padding-top: 0;
-}
 
  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
  @media screen and (max-width: 600px) {
