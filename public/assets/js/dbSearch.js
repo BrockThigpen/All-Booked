@@ -149,7 +149,7 @@ $(document).on('click', '.checkOut', function () {
     dataType: 'json',
     type: 'GET'
   }).then(function (data) {
-    console.log(data)
+    console.log(data);
 
     if (data[0].copiesIN > 0) {
 
@@ -178,14 +178,13 @@ $(document).on('click', '.checkOut', function () {
         }, 2000);
 
       });
-    }
-    else {
+    } else {
       document.getElementsByClassName('checkOut')[cardID].innerText = 'No Copies Available';
       setTimeout(function () {
         document.getElementsByClassName('checkOut')[cardID].innerText = 'Check Out Book!';
       }, 2000);
     }
-  })
+  });
 });
 
 $(document).on('click', '.checkIn', function () {
@@ -229,14 +228,13 @@ $(document).on('click', '.checkIn', function () {
       }, 2000);
 
     });
-  }
-  else {
+  } else {
     document.getElementsByClassName('checkIn')[cardID].innerText = 'All Copies In';
     setTimeout(function () {
       document.getElementsByClassName('checkIn')[cardID].innerText = 'Check In Book!';
     }, 2000);
   }
-})
+});
 
 
 
