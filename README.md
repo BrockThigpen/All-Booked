@@ -14,11 +14,11 @@ As a user, I want to find a book by searching a database so that I can quickly f
 
 ### <a name="Project Overview"></a>Use
 All Booked is a library management application that showcases the MVC (Model-View-Controller) framework. Users can search the libraries database to look for books. 
-![image](https://raw.githubusercontent.com/BrockThigpen/Project-2/master/public/assets/images/indexDemo.png)
+![indexDemo](https://user-images.githubusercontent.com/55072295/74088195-6da47900-4a61-11ea-9a6f-cec4c77a3a6d.png)
 If the searched book already exsists in the database it will be displayed along with all relevant information. The user can then check the book out as well as check books back in.
-![image](https://raw.githubusercontent.com/BrockThigpen/Project-2/master/public/assets/images/libDemo.png)
+![libDemo](https://user-images.githubusercontent.com/55072295/74088206-8a40b100-4a61-11ea-8ee1-862357d81369.png)
 If the searched book does not exsist in the database the user will be given the option to add books to the database. Once a book has been added to the database the user can go back to searching the library.
-![image](https://raw.githubusercontent.com/BrockThigpen/Project-2/master/public/assets/images/searchDemo.png)
+![searchDemo](https://user-images.githubusercontent.com/55072295/74088209-92005580-4a61-11ea-9636-103fa9021b74.png)
 
 
 ### <a name="Tech-Used"></a>Technologies Used
