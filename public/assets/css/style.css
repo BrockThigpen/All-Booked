@@ -137,10 +137,8 @@ p{
 .toAddPage {
   display: none;
 }
-
 .card {
   margin: 30px 0;
-}
 
 #checkOut{
   margin-bottom: 15px;
@@ -182,3 +180,4 @@ p{
     margin-left: 15px ;
   }
 }
+
