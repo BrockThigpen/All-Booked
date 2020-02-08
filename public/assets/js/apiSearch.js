@@ -62,7 +62,7 @@ function bookSearch() {
       imgDiv.setAttribute('class', 'col s2');
       contentDiv.setAttribute('class', 'col s6');
       buttonDiv.setAttribute('class', 'col s4');
-      cardButton.setAttribute('class', 'cardBtn btn waves-effect waves-light');
+      cardButton.setAttribute('class', 'cardBtn btn waves-effect waves-light darken');
       cardButton.setAttribute('type', 'submit');
       cardButton.setAttribute('name', 'action');
       cardButton.setAttribute('data-id', i);
@@ -162,6 +162,10 @@ $(document).on('click', '.cardBtn', function () {
       }).then(function (data) {
         console.log(data);
         console.log('It has updated!');
+        document.getElementsByClassName('cardBtn')[cardID].innerText = 'Book Added To Library';
+        setTimeout(function () {
+          document.getElementsByClassName('cardBtn')[cardID].innerText = 'Add Book to our Library Stock';
+        }, 2000);
         selectedBook = {
           title: '',
           author: '',

@@ -141,3 +141,24 @@ p{
 .card {
   margin: 30px 0;
 }
+
+.checkOut{
+  margin-bottom: 15px;
+  float: right;
+}
+
+.checkIn{
+  float: right;
+}
+
+.checkIn:hover {
+  background-color: #186961;
+}
+
+.checkOut:hover {
+  background-color: #186961;
+}
+
+.darken:hover {
+  background-color: #186961;
+}
