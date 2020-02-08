@@ -137,10 +137,8 @@ p{
 .toAddPage {
   display: none;
 }
-
 .card {
   margin: 30px 0;
-}
 
 .checkOut{
   margin-bottom: 15px;
@@ -162,3 +160,4 @@ p{
 .darken:hover {
   background-color: #186961;
 }
+
