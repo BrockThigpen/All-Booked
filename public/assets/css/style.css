@@ -89,8 +89,7 @@ body {
 
   
 .row {
-  padding: 0 20px;
-  margin: 0 50px;
+  padding: 20px;
 }
 
 #cardDescription {
@@ -137,4 +136,8 @@ p{
 }
 .toAddPage {
   display: none;
+}
+
+.card {
+  margin: 30px 0;
 }
