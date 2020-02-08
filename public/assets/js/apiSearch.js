@@ -178,7 +178,7 @@ $(document).on('click', '.cardBtn', function () {
           copiesIn: 1
         };
       });
-    // if an empty array is returned, create new row in db with values
+      // if an empty array is returned, create new row in db with values
     } else {
       console.log('Does not exist');
       console.log(cardID);

@@ -146,44 +146,44 @@ $(document).on('click', '.checkOut', function () {
     url: 'api/book/isbn/' + cardISBN,
     dataType: 'json',
     type: 'GET'
-  }).then(function(data) {
+  }).then(function (data) {
     console.log(data)
 
-  if (data[0].copiesIN > 0) {
+    if (data[0].copiesIN > 0) {
 
-  $.ajax({
-    method: 'PUT',
-    url: 'api/books/isbn/' + cardISBN,
-    data: dataObject,
-    // contentType: 'application/json'
-  }).then(function (data) {
-    console.log(data);
-    console.log('It has updated!');
+      $.ajax({
+        method: 'PUT',
+        url: 'api/books/isbn/' + cardISBN,
+        data: dataObject,
+        // contentType: 'application/json'
+      }).then(function (data) {
+        console.log(data);
+        console.log('It has updated!');
 
 
-    $.ajax({
-      url: 'api/book/ISBN/' + cardISBN,
-      dataType: 'json',
-      type: 'GET'
-    }).then(function (data) {
-      document.getElementsByClassName('copiesIn')[cardID].innerHTML = data[0].copiesIN;
-      console.log(data);
-    });
+        $.ajax({
+          url: 'api/book/ISBN/' + cardISBN,
+          dataType: 'json',
+          type: 'GET'
+        }).then(function (data) {
+          document.getElementsByClassName('copiesIn')[cardID].innerHTML = data[0].copiesIN;
+          console.log(data);
+        });
 
-    document.getElementsByClassName('checkOut')[cardID].innerText = 'Checked Out!';
-    setTimeout(function () {
-      document.getElementsByClassName('checkOut')[cardID].innerText = 'Check Out Book!';
-    }, 2000);
+        document.getElementsByClassName('checkOut')[cardID].innerText = 'Checked Out!';
+        setTimeout(function () {
+          document.getElementsByClassName('checkOut')[cardID].innerText = 'Check Out Book!';
+        }, 2000);
 
-  });
-  }
-  else {
-    document.getElementsByClassName('checkOut')[cardID].innerText = 'No Copies Available';
-    setTimeout(function () {
-      document.getElementsByClassName('checkOut')[cardID].innerText = 'Check Out Book!';
-    }, 2000);
-  }
-})
+      });
+    }
+    else {
+      document.getElementsByClassName('checkOut')[cardID].innerText = 'No Copies Available';
+      setTimeout(function () {
+        document.getElementsByClassName('checkOut')[cardID].innerText = 'Check Out Book!';
+      }, 2000);
+    }
+  })
 });
 
 $(document).on('click', '.checkIn', function () {
@@ -202,31 +202,31 @@ $(document).on('click', '.checkIn', function () {
 
   if (copiesInNow < totalCopiesNow) {
 
-  $.ajax({
-    method: 'PUT',
-    url: 'api/books/isbn/' + cardISBN,
-    data: dataObject,
-    // contentType: 'application/json'
-  }).then(function (data) {
-    console.log(data);
-    console.log('It has updated!');
-
-
     $.ajax({
-      url: 'api/book/ISBN/' + cardISBN,
-      dataType: 'json',
-      type: 'GET'
+      method: 'PUT',
+      url: 'api/books/isbn/' + cardISBN,
+      data: dataObject,
+      // contentType: 'application/json'
     }).then(function (data) {
-      document.getElementsByClassName('copiesIn')[cardID].innerHTML = data[0].copiesIN;
       console.log(data);
+      console.log('It has updated!');
+
+
+      $.ajax({
+        url: 'api/book/ISBN/' + cardISBN,
+        dataType: 'json',
+        type: 'GET'
+      }).then(function (data) {
+        document.getElementsByClassName('copiesIn')[cardID].innerHTML = data[0].copiesIN;
+        console.log(data);
+      });
+
+      document.getElementsByClassName('checkIn')[cardID].innerText = 'Checked In!';
+      setTimeout(function () {
+        document.getElementsByClassName('checkIn')[cardID].innerText = 'Check In Book!';
+      }, 2000);
+
     });
-
-    document.getElementsByClassName('checkIn')[cardID].innerText = 'Checked In!';
-    setTimeout(function () {
-      document.getElementsByClassName('checkIn')[cardID].innerText = 'Check In Book!';
-    }, 2000);
-
-  });
   }
   else {
     document.getElementsByClassName('checkIn')[cardID].innerText = 'All Copies In';
