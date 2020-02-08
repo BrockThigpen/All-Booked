@@ -15,7 +15,6 @@
 ![image](https://raw.githubusercontent.com/BrockThigpen/Project-2/master/public/assets/images/searchDemo.png)
 
 ### <a name="User-Story"></a>User Story
-
 As a user, I want to find a book by searching a database so that I can quickly find the appropiate book without the hassle of going to a library
 
 ### <a name="Use"></a>Use
