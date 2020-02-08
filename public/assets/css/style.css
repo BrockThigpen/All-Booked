@@ -142,15 +142,6 @@ p{
   margin: 30px 0;
 }
 
-#checkOut{
-  margin-bottom: 15px;
-  float: right;
-}
-
-#checkIn{
-  float: right;
-}
-
 .checkIn:hover {
   background-color: #186961;
 }
@@ -161,6 +152,18 @@ p{
 
 .darken:hover {
   background-color: #186961;
+}
+
+#apiButton {
+  display: inline-block
+}
+
+#libraryBtn {
+  display: inline-block;
+}
+
+.addMargin {
+  margin-bottom: 30px;
 }
 
  /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
