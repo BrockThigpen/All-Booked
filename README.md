@@ -22,10 +22,10 @@ If the searched book does not exsist in the database the user will be given the 
 
 
 ### <a name="Tech-Used"></a>Technologies Used
-This project utilizes HTML, CSS, Javascript, Node.js, Express.js, MySQL, Sequelize, and Express-Handlebars.
+This project utilizes HTML, CSS, Javascript, Node.js, Express.js, MySQL, Sequelize, Express-Handlebars, JawsDB, and is deployed through Heroku.
 
 ### <a name="Installation"></a>Installation
-Begin by cloning this repository, run NPM INSTALL in the root of the directory.
+Begin by cloning this repository, run <pre><code>NPM INSTALL</code></pre> in the root of the directory.
 
 ### <a name="license"></a>License
 Copyright (c) 2020 Kacie Hatley, Brock Thgipen, Sile Kiman, Alyssa Barnett
