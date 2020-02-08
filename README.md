@@ -4,8 +4,9 @@
 
 # Table Of Contents
 - [User Story](###User%20Story)
-Tech Used
-Installation
+- [Tech Used](###Tech%20Used)
+- [Installation](###Installation)
+
 
 
 ![image](https://raw.githubusercontent.com/BrockThigpen/Project-2/master/public/assets/images/indexDemo.png)
