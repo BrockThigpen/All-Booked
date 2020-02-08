@@ -3,10 +3,10 @@
 <a href='https://cryptic-chamber-77839.herokuapp.com/'>Veiw deployed app here.</a>
 
 # Table Of Contents
-- [User Story](###User-Story)
-- [Project Overview](###Use)
-- [Technologies Used](###Tech%20Used)
-- [Installation](###Installation)
+- [User Story](#User-Story)
+- [Project Overview](#Use)
+- [Technologies Used](#Tech%20Used)
+- [Installation](#Installation)
 - [License](#license)
 
 
