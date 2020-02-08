@@ -137,6 +137,50 @@ p{
 .toAddPage {
   display: none;
 }
-.card{
-  margin: 30px 0px;
+.card {
+  margin: 30px 0;
+
+.checkIn:hover {
+  background-color: #186961;
 }
+
+.checkOut:hover {
+  background-color: #186961;
+}
+
+.darken:hover {
+  background-color: #186961;
+}
+
+#apiButton {
+  display: inline-block
+}
+
+#libraryBtn {
+  display: inline-block;
+}
+
+.addMargin {
+  margin-bottom: 30px;
+}
+
+ /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+ @media screen and (max-width: 600px) {
+  .topnav a, .topnav input[type=text] {
+    float: none;
+    display: block;
+    text-align: left;
+    width: 100%;
+    margin: 0;
+    padding: 14px;
+  }
+  .topnav input[type=text] {
+    border: 1px solid #ccc;
+  }
+  .row .col.s6 {
+    width: 80%; 
+    margin-top: 40px;
+    margin-left: 15px ;
+  }
+}
+
